@@ -48,7 +48,7 @@ COPY . /var/www/html
 
 # 7. 配置文件与权限处理
 # 拷贝 Nginx 配置和启动脚本
-COPY ./nginx.conf /etc/nginx/http.d/default.conf
+COPY ./nginx.conf /etc/nginx/nginx.conf
 COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
 
 # 赋予脚本执行权限，并递归修复 ThinkPHP 目录权限
