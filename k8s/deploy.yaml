@@ -2,9 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: thinkphp-app
-  namespace: prod # 也可以是你自定义的 namespace
+  namespace: prod
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: thinkphp
@@ -13,23 +13,35 @@ spec:
       labels:
         app: thinkphp
     spec:
+      # --- 关键配置：指定节点名称 ---
+      nodeName: hk-edge-1 
+      
       containers:
       - name: php-nginx
-        image: ghcr.io/gop206/thinkphp:latest
-        # 强制每次拉取最新，确保 latest 标签生效
-        imagePullPolicy: Always 
+        image: ghcr.io/gop206/thinkphp:latest  # 确保你已经解决了 push 权限问题
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
+        resources:
+          requests:
+            cpu: "2"
+            memory: "2Gi"
+          limits:
+            cpu: "40"   # 允许利用高性能节点的算力
+            memory: "16Gi"
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: thinkphp-service
+  namespace: prod
 spec:
   type: NodePort
   selector:
     app: thinkphp
   ports:
-  - port: 80
-    targetPort: 80
-    nodePort: 30080 # 访问地址：http://服务器IP:30080
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30080 # 外部访问端口
