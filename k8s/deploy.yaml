@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: thinkphp-app
-  namespace: default # 也可以是你自定义的 namespace
+  namespace: prod # 也可以是你自定义的 namespace
 spec:
   replicas: 2
   selector:
