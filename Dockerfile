@@ -28,7 +28,7 @@ RUN docker-php-ext-configure gd \
         intl \
     && pecl install redis \
     && docker-php-ext-enable redis \
-    && apk del $PHPIZE_DEPS
+    && apk del $PHPIZE_DEPS \
     && rm -rf /tmp/pear  \
     && docker-php-source delete  \
     && rm -rf /var/cache/apk/*
