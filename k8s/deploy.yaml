@@ -13,12 +13,12 @@ spec:
       labels:
         app: thinkphp
     spec:
-      # --- 关键配置：指定节点名称 ---
+      # --- 指定节点名称 ---
       nodeName: hk-edge-1 
       
       containers:
       - name: php-nginx
-        image: ghcr.io/gop206/thinkphp:latest  # 确保你已经解决了 push 权限问题
+        image: ghcr.io/gop206/thinkphp:latest  
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -27,7 +27,7 @@ spec:
             cpu: "2"
             memory: "2Gi"
           limits:
-            cpu: "40"   # 允许利用高性能节点的算力
+            cpu: "40"  
             memory: "16Gi"
 
 ---
@@ -37,7 +37,7 @@ metadata:
   name: thinkphp-service
   namespace: prod
 spec:
-  type: ClusterIP # 仅集群内部访问
+  type: ClusterIP 
   selector:
     app: thinkphp
   ports:
