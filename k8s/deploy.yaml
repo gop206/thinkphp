@@ -37,11 +37,10 @@ metadata:
   name: thinkphp-service
   namespace: prod
 spec:
-  type: NodePort
+  type: ClusterIP # 仅集群内部访问
   selector:
     app: thinkphp
   ports:
     - protocol: TCP
       port: 80
       targetPort: 80
-      nodePort: 30080 # 外部访问端口
