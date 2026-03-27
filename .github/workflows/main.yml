@@ -31,7 +31,6 @@ jobs:
         with:
           context: .
           push: true
-          # 自动打上 sha 和 latest 标签
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
