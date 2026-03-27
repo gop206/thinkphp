@@ -29,11 +29,9 @@ RUN docker-php-ext-configure gd \
     && pecl install redis \
     && docker-php-ext-enable redis \
     && apk del $PHPIZE_DEPS
-
-    apk del .build-deps && \
-    rm -rf /tmp/pear && \
-    docker-php-source delete && \
-    rm -rf /var/cache/apk/*
+    && rm -rf /tmp/pear && \
+    && docker-php-source delete && \
+    && rm -rf /var/cache/apk/*
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY t100.php /var/www/html
