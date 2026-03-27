@@ -1,0 +1,11 @@
+# .dockerignore （新建或修改这个文件）
+.git
+.gitignore
+README.md
+.dockerignore
+.github
+k8s/
+vendor/          # composer 依赖通常在构建时重新安装，不要复制
+node_modules/
+*.log
+.env
